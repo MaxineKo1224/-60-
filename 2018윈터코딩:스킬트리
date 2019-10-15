@@ -1,0 +1,26 @@
+def solution(skill, skill_trees):
+    
+    count = 0
+    skill = list(skill)
+    for i in range(len(skill_trees)):
+        answer = True 
+        res=[]
+        num=[]
+        for j in skill_trees[i]:
+            if j in skill:
+                res.append(j)
+        for k in range(len(res)):
+            for g in range(len(skill)):
+                if res[k] == skill[g]:
+                    num.append(res[k])
+        for n in range(len(num)):
+            if num[n] != skill[n] :
+                answer = False
+        if answer == True:
+            count += 1
+    return count
+    
+    
+    
+    간단한 문젠데 엄청 헤맸고ㅠ__ㅠ
+    길고 복잡한 코드라 올리지 말까 고민하다가 그냥 올림..
