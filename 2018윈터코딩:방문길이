@@ -1,0 +1,45 @@
+혼자서 못품 ㅡㅡ... ㅠ_ㅠ... 
+
+def solution(dirs):
+    answer_list=[]
+    x_count=0
+    y_count=0
+    for i in dirs:
+        if i=="U":
+            if (y_count<5):
+                y_count+=1
+                if ((x_count,y_count-1),(x_count,y_count)) in answer_list:
+                    pass
+                else:
+                    answer_list.append(((x_count,y_count-1),(x_count,y_count)))
+        elif i=="D":
+            if (y_count>-5):
+                y_count-=1
+                if ((x_count,y_count),(x_count,y_count+1)) in answer_list:
+                    pass
+                else:
+                    answer_list.append(((x_count,y_count),(x_count,y_count+1)))
+        elif i=="L":
+            if (x_count>-5):
+                x_count-=1
+                if ((x_count,y_count),(x_count+1,y_count)) in answer_list:
+                    pass
+                else:
+                    answer_list.append(((x_count,y_count),(x_count+1,y_count)))
+        elif i=="R":
+            if (x_count<5):
+                x_count+=1
+                if ((x_count-1,y_count),(x_count,y_count)) in answer_list:
+                    pass
+                else:
+                    answer_list.append(((x_count-1,y_count),(x_count,y_count)))
+    return len(answer_list)
+
+
+이 코딩문제를 푸는데 내가 생각을 못했던 점은
+U가 +1 이고 D가 -1일때 둘의 좌표가 같아지도록 (e.g U=((0,0),(0,1)), D=((0,0),(0,1))) if~else 조작을 해주는 점이다. 
+(R과 L도 마찬가지로)
+
+
+
+
