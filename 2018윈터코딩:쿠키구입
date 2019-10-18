@@ -9,22 +9,22 @@ def solution(cookie):
         else:
             return False
     for i in range(len(cookie)-1):
-        frontsum = cookie[i]
-        indexOfFrontSum = i 
-        backsum = cookie[i+1]
-        indexOfBackSum = i+1
+        fsum = cookie[i]
+        findex = i 
+        bsum = cookie[i+1]
+        bindex = i+1
         
         while True:
-            if frontsum == backsum :
-                maxnum = max(frontsum, maxnum)
+            if fsum == bsum :
+                maxnum = max(fsum, maxnum)
                 
-            if indexOfFrontSum > 0 and frontsum <= backsum :
-                indexOfFrontSum -= 1
-                frontsum += cookie[indexOfFrontSum]
+            if findex > 0 and fsum <= bsum :
+                findex -= 1
+                fsum += cookie[findex]
                 
-            elif indexOfBackSum < len(cookie)-1 and frontsum >= backsum:
-                indexOfBackSum += 1
-                backsum += cookie[indexOfBackSum]
+            elif bindex < len(cookie)-1 and fsum >= bsum:
+                bindex += 1
+                bsum += cookie[bindex]
                 
             else:
                 break
