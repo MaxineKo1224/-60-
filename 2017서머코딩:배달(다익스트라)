@@ -1,0 +1,149 @@
+역시 내가 풀지 못했다.. 이 문제를 풀기 위해서는 다익스트라 알고리즘을 알아야 한다길래
+다익스트라 알고리즘을 파이썬으로 공부하다가 도저히 잘 이해가 안되고
+마침 c++을 공부중이었기에 c++로 다익스트라 알고리즘 소스코드를 찾아서 공부해봤다.
+이 과정에서 
+vertor container, pair, typedef, priority_queue, auto, c++ STL, this포인터를 공부했다.
+다익스트라 알고리즘을 이해하려고 여러 블로그 포스트들을 봤지만 잘 이해가 안가고
+geeksforgeeks 코드가 그.나.마 이해가 갔다 ㅠ__ㅠ
+이하는 geeksforgeeks의 우선순위 큐를 이용한 다익스트라 알고리즘 소스코드
+
+
+// Program to find Dijkstra's shortest path using
+// priority_queue in STL
+
+#include<bits/stdc++.h>
+using namespace std;
+#define INF 0x3f3f3f3f
+
+// iPair ==> Integer pair 
+typedef pair<int,int> iPair;
+
+// This class represents a directed graph using
+// adjacency list representation 
+
+class Graph
+{
+	
+	int V; // No. of vertices
+	
+	// In a weighted graph, we need to store vertex
+	// and weight pair for every edge
+	list < pair<int, int> > *adj;  //별이 왜 붙어있죠?
+	
+
+public:
+	Graph(int V); // Constructor
+	
+	// function to add an edge to graph //edge를 graph에 add 한다는게 머야 ㅡㅡ;;
+	void addEdge(int u, int v, int w);
+	
+	// prints shortest path from s
+	void shortestPath(int s);
+
+};
+// Allocates memory for adjacency list
+
+Graph::Graph(int V )
+{
+	this -> V = V;
+	adj = new list<iPair> [V];
+}
+
+void Graph::addEdge(int u, int v, int w)
+{
+	adj[u].push_back(make_pair(v,w));
+	adj[v].push_back(make_pair(u,w));
+}
+
+
+// Prints shotest paths from src to all other vertices
+void Graph::shortestPath(int src)
+{
+	// Create a priority queue to store vertices that
+	// are being preprocessed.
+	priority_queue< iPair, vector <iPair>, greater<iPair> > pq;
+	
+	// Create a vector for distances and initialize all
+	// distances as infinite (INF)
+	vector<int> dist(V, INF);
+	
+	// Insert source itself in priority queue and initialize
+	// its distance as 0.
+	pq.push(make_pair(0, src));
+	dist[src] = 0;
+	
+	/* Looping till priority queue becomes empty 
+	(or all distances are not finalized) */
+	
+	/* ) While either pq doesn't become empty
+    a) Extract minimum distance vertex from pq. 
+       Let the extracted vertex be u.
+    b) Loop through all adjacent of u and do 
+       following for every vertex v. */
+	
+	while(!pq.empty())
+	{
+		// The first vertex in pair is the minimum distance
+		// vertex, extract it from priority queue.
+		// vertex label is stored in second of pair // vertex label이 몬데? 
+		// (it has to be done this way to keep the vertices
+		// stored distance (distance must be first item in pair)
+		int u = pq.top().second;
+		pq.pop();
+		
+		// 'i' is used to get all adjacent vertices of a vertex
+		list< pair<int, int> >::iterator i;
+		for (i = adj[u].begin(); i != adj[u].end(); ++i)
+		{
+			// Get vertex label and weight of current adjacent
+			// of u.
+			int v = (*i).first;
+			int weight = (*i).second;
+			
+			// If there is shorted path to v through u.
+			if (dist[v] > dist[u] + weight)
+			{
+				// Updating distance of v
+				dist[v] = dist[u] + weight;
+				pq.push(make_pair(dist[v], v));
+			 } 
+			
+		}
+		
+	}
+	// Print shortest distances stored in dist[]
+	printf("Vertex   Distance from Source\n");
+	for (int i = 0;  i < V; ++i)
+	    printf("%d \t\t %d\n", i, dist[i]);
+}
+
+
+
+
+// Driver program to test methods of graph class 
+int main() 
+{ 
+    // create the graph given in above fugure 
+    int V = 9; 
+    Graph g(V); 
+  
+    //  making above shown graph 
+    g.addEdge(0, 1, 4); 
+    g.addEdge(0, 7, 8); 
+    g.addEdge(1, 2, 8); 
+    g.addEdge(1, 7, 11); 
+    g.addEdge(2, 3, 7); 
+    g.addEdge(2, 8, 2); 
+    g.addEdge(2, 5, 4); 
+    g.addEdge(3, 4, 9); 
+    g.addEdge(3, 5, 14); 
+    g.addEdge(4, 5, 10); 
+    g.addEdge(5, 6, 2); 
+    g.addEdge(6, 7, 1); 
+    g.addEdge(6, 8, 6); 
+    g.addEdge(7, 8, 7); 
+  
+    g.shortestPath(0); 
+  
+    return 0; 
+} 
