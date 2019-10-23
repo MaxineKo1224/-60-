@@ -1,0 +1,82 @@
+(c++ 버전)
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int d[100001];
+
+using namespace std;
+
+int solution(vector<int> sticker)
+{
+    int answer = 0 ;
+    int size = sticker.size();
+
+    if (size == 1){
+        return sticker[0];   
+    }
+
+    d[0] = sticker[0];
+    d[1] = sticker[0];
+    for(int i = 2; i<size-1; i++){
+        d[i] = max(sticker[i]+d[i-2], d[i-1]);
+    }
+    answer = d[size-2];
+
+    d[0] = 0;
+    d[1] = sticker[1];
+    for(int i = 2; i<size; i++){
+        d[i] = max(d[i-1], sticker[i]+d[i-2]);
+    }
+    answer = max(answer, d[size-1]);
+
+    return answer;
+}
+
+역시나 내가 풀지 못했고;;
+
+*******************************************************
+    d[0] = sticker[0];
+    d[1] = sticker[0];
+    for(int i = 2; i<size-1; i++){
+        d[i] = max(sticker[i]+d[i-2], d[i-1]);
+    }
+    answer = d[size-2];
+
+    d[0] = 0;
+    d[1] = sticker[1];
+    for(int i = 2; i<size; i++){
+        d[i] = max(d[i-1], sticker[i]+d[i-2]);
+*******************************************************
+        
+이 부분을 구현하는게 (아주 중요한) 핵심인데..
+나는 생각하지 못했고 
+저걸 보고 신기하다.. 어떻게 저걸 생각했지?
+하는 생각만 많이 했다 ㅠ__ㅠ......;;; ..................... 
+그리고 첫번째 for문과 두번째 for문의 max 내용이 반대되는?..구조라는것도 신기하다ㅋ..
+input 배열이 [14,6,5,11,3,9,2,10] 라고 할 때 
+14+5 와 14+11 을 비교하고 
+14+11 과 14+5+3 을 비교하고 
+14+5+3 과 14+11+9 를 비교하고
+.....하는 방식으로 진행이 된다. 
+
+(python 버전)
+짧고 매우 간단한걸 보고 놀랐다.. .. OTL..
+def collect_sticker(sticker):
+    dq = {}
+    dq[0] = sticker[0]
+    dq[1] = max(sticker[:2])
+    for i in range(len(sticker)-2):
+        dq[i+2] = max(dq[i+1], dq[i]+sticker[i+2])
+    return dq
+    
+def solution(sticker):
+    if len(sticker) == 1 :
+        return sticker[0]
+    return max(collect_sticker(sticker[:-1])[len(sticker)-2], collect_sticker(sticker[1:])[len(sticker)-2])
+
+
+
+#c++ 봤다가 python봤다가 하는거 너무 재밌다 ㅎ_ㅎ 
+#그리고 역시 나는 C++이 훨 재밌고 좋다.ㅋㅋㅋㅋ 왤까?
+
