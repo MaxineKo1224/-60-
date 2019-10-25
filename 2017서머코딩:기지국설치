@@ -79,7 +79,39 @@ while True :
 
 
 
+# 나 처럼 **똥코드**를 작성하면 안된다.
+# 아래와 같은 좋고 멋있고 아름답고 간결한 코드를 작성해야된다.
+# 나도 이런 코드 짤 수 있으면 좋겠다.....계속 연습하면 언젠가 되겠지
 
+(c++ 코드)
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int solution(int n, vector<int>stations, int w)
+{
+    int count = 0;
+    int left = 0;
+    int state = 0;
+    while(true)
+    {
+        if(state<=stations.size() && left >= stations[state]-w)
+    {
+        left = station[state] + w + 1;
+        state++;
+    }
+        else
+    {
+        int newleft = left + w ;
+            if((state <= (int)stations.size()-2) && newleft >= stations[state+1] - w)
+                newleft = stations[state+1] - w - 1;
+        left = newleft + w + 1;
+        count++;
+    }
+        if(left>n) break;
+    return count;
+}
+    
 
 
 
