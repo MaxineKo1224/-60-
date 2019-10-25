@@ -1,0 +1,89 @@
+(주피터노트북에서 실행한 파이썬 코드: 샘플 테스트 두개만 통과했다.....ㅠ__ㅠ)
+
+<나의 접근>
+배열의 맨 앞과 맨 뒤 때문에 좀 까다로울거 같단 생각에
+앞뒤로 w크기만큼 [0]을 추가해준 뒤에 알고리즘을 진행시켜나갔다.
+
+# 임시로 input 데이터는 밑에걸로 설정
+apart = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16] 
+
+# 케이스가 1,16 일때랑 2,15일때가 까다로우니까..(??)
+n = 16
+stations = [2,15]
+l = len(stations)
+w = 2
+
+spread = []
+
+# 배열 앞뒤로 w크기만큼 제로패딩. 
+
+apart = ([0]*w) + apart + ([0]*w) 
+# [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 0, 0] 이런 결과가 나옴.
+
+
+for i in range(len(apart)):
+    if apart[i] in stations:
+        spread.append((apart[i-w:i+w+1]))
+spread = [y for x in spread for y in x]
+
+# spread를 실행해보면 
+# [0, 1, 2, 3, 4, 13, 14, 15, 16, 0]
+# 기지국이 설치된 곳과 w 길이만큼의 배열 요소가 포함되어 있음.
+
+# 0은 쓸모가 없으니까 없애버리기 위해
+spread2 = []
+for i in range(len(spread)):
+    if spread[i] == 0 :
+        continue
+    else:
+        spread2.append(spread[i])
+        
+# spread2를 실행해보면 [1, 2, 3, 4, 13, 14, 15, 16]
+
+# 이제 기지국이 설치되고 전파가 닿는곳은 제외하고 살펴보기로함
+
+not_spread =[]
+for j in range(len(apart)):
+    if apart[j] == 0 :
+        continue
+    elif apart[j] in spread2 :
+        continue
+    else:    
+        not_spread.append(apart[j])
+# not_spread를 실행해보면 [5, 6, 7, 8, 9, 10, 11, 12] 이렇게 나옴
+
+answer = 0
+point = 0
+
+while True :
+        if len(not_spread) == 2*w+1 : 
+            answer += 1 
+            break
+        else:
+            point += len(not_spread) - (2*w + 1)
+            answer += 1
+            if point > (2*w+1):
+                answer += 1
+            elif point == 2*w+1:
+                break
+            else:
+                answer += 1
+        break
+            
+    return len(stations) + answer
+
+# 샘플 테스트 두개만 통과...
+# 10줄로 끝내버린 다른 알고리즘을 보고.....할 말을 잃었다...
+
+
+
+
+
+
+
+
+
+
+        
+
+
