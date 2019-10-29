@@ -1,0 +1,35 @@
+# 샘플 통과 후 제출했는데 정확성 테스트는 18개 다 통과했는데
+# 효율성 테스트 세개중에 한개가 실패했다...ㅠ__ㅠ...
+# 어떻게 고쳐야 할까. 뭐때문에 효율성에서 실패한거지..?
+****************************************************
+def solution(A, B): 
+    win = 0
+    A.sort(reverse=True)
+    B.sort(reverse=True)
+    for i in range(len(A)):
+        for j in range(len(B)):
+            if(A[i]>=B[j]):
+                continue
+            else:
+                win += 1
+                del B[j]
+                break;
+    return win 
+****************************************************
+
+# 그런데 이렇게 바꾸니까 됐다 ; 
+
+****************************************************
+def solution(A, B): 
+    win = 0
+    sortA = sorted(A)
+    sortB = sorted(B)
+    for i in range(len(sortA)):
+        for j in range(len(sortB)):
+            if(sortB[j]>sortA[i]):
+                win += 1
+                del sortB[j]
+                break;
+    return win 
+***************************************************
+
