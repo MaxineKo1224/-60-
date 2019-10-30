@@ -33,3 +33,26 @@ def solution(A, B):
     return win 
 ***************************************************
 
+//c++버전
+
+***************************************************
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int solution(vector<int>A, vector<int>B){
+	int win = 0;
+	int j = 0;
+	sort(A.begin(), A.end());
+	sort(B.begin(), B.end());
+	for(int i = 0; i<B.size(); i++){
+		if(A[j]<B[i]){
+			win++;
+			j++;
+		}
+	}
+	return win;
+}
+****************************************************
+
