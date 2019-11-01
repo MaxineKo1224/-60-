@@ -1,0 +1,70 @@
+# 어려웠고 내가 풀지 못했지만 정말정말 재미있었던 문제였다 ! 
+# 시간초과 오류로 통과를 하지 못한 내 파이썬 코드
+*********************************************************************************
+def solution(land, P, Q):
+    land = [i for j in land for i in j]
+    maxnum = max(land)
+    mincost = 9876543210
+    while(maxnum >= 0):
+        blocks = 0
+        count1 = 0
+        count2 = 0
+        for k in range(len(land)):
+            if(land[k] == maxnum):
+                continue
+            if(land[k] > maxnum):
+                count2 += (land[k] - maxnum)
+            else:
+               count1 += (maxnum - land[k])
+        blocks = (count1*P) + (count2*Q)
+        mincost = min(blocks, mincost)
+        maxnum -= 1
+    return mincost
+****************************************************************************
+
+// 효율성이 그렇게 좋은 코드는 아니지만 굉장히 마음에 들었던 코드!!
+// (출처:https://ydeer.tistory.com/78)
+****************************************************************************
+#include <vector>
+using namespace std;
+
+int n;
+
+long long cal(vector<vector<int> >& land, int height, int P, int Q){
+    long long answer = 0;
+    for(int i = 0; i<n; i++){
+        for(int j = 0; j<n; j++){
+            long long mult = height - land[i][j] > 0 ? P : -Q;
+            answer += (long long)(height - land[i][j])*mult;
+        }
+    }
+    return answer;
+}
+long long solution(vector<vector<int> > land, int P, int Q){
+    n = land.size();
+    int max = land[0][0];
+    int min = land[0][0];
+    for(int i = 0; i<n; i++){
+        for(int j  = 0; j<n; j++){
+            if(land[i][j] > max) max = land[i][j];
+            else if(land[i][j] < min) min = land[i][j];
+        }
+    }
+    int middle;
+    while(min <= max){
+        middle = (min+max)/2;
+        if(min==max) break;
+        long long result1 = cal(land, middle, P, Q);
+        long long result2 = cal(land, middle+1, P, Q);
+        if(result1==result2) break;
+        else if(result1<result2){
+            max = middle;
+        }else{
+            min = middle+1;
+        }
+    }
+    return cal(land, middle, P, Q);
+}
+****************************************************************************
+
+//이제까지 풀어본 문제중에 제일 재미있었다! 
