@@ -32,17 +32,49 @@ def solution(cookie):
     answer = maxnum
     return maxnum
     
-    역시 내가 풀지 못했다........OTL...
-    처음에 떠올린건 stack이었지만 맞지 않는 방법이었다.
-    코드를 찾아보던 중에 dp 라는 단어가 나와서 Dynamic Programming(동적프로그래밍) 이라는걸 공부하게 됐다.
-    *동적프로그래밍이란 해결 하려는 문제를 작은 단위로 쪼갠 뒤 그 쪼개진 부분문제들의 답을 이용해 원 문제의 답을 구하는 방식이다.
-    최적화된 답을 찾을 수 있다.*
+역시 내가 풀지 못했다........OTL...
+처음에 떠올린건 stack이었지만 맞지 않는 방법이었다.
+코드를 찾아보던 중에 dp 라는 단어가 나와서 Dynamic Programming(동적프로그래밍) 이라는걸 공부하게 됐다.
+*동적프로그래밍이란 해결 하려는 문제를 작은 단위로 쪼갠 뒤 그 쪼개진 부분문제들의 답을 이용해 원 문제의 답을 구하는 방식이다.
+최적화된 답을 찾을 수 있다.*
+임의의 배열을 만들고 코드 한 줄 한 줄 따라가면서 세번정도 해보니
+이 코드가 옳다는 것은 이해를 했는데 
+이 코드의 while문이 어떤식으로 추론될수(?) 있었는지 그부분이 신기하고 가늠이 안됐다. 
     
-    임의의 배열을 만들고 코드 한 줄 한 줄 따라가면서 세번정도 해보니
-    이 코드가 옳다는 것은 이해를 했는데 
-    이 코드의 while문이 어떤식으로 추론될수(?) 있었는지 그부분이 신기하고 가늠이 안됐다. 
+# if문을 거쳤으면 elif는 건너뛰자 
+# 위의 파이썬 코드보다 밑에 c++ 코드가 더 나은거 같다
     
-    ## if문을 거쳤으면 elif는 건너뛰자 ##
     
-   
+******************************************************************************************
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int solution(vector<int> cookie) {
+    int answer = 0;
+    int n = cookie.size();
+    vector <int> psum(n + 1);
+    for(int i=1;i<=n;i++) psum[i] = psum[i-1] + cookie[i - 1];
+    for(int i=1;i<n;i++){
+        for(int j=i+1;j<=n;j++){
+            int left = i, right = j;
+            while(left <= right){
+                int mid = (left+right) / 2;
+                int left_sum = psum[mid] - psum[i - 1];
+                int right_sum = psum[j] - psum[mid];
+                if(left_sum == right_sum) {
+                    answer = max(answer, left_sum);
+                    break;
+                }
+                else if(left_sum > right_sum) right = mid - 1;
+                else left = mid + 1;
+            }
+        }
+    }
+    return answer;
+}   
+******************************************************************************************
+
+//이거 부분합수열 아닌가..?
     
