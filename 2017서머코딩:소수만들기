@@ -1,0 +1,35 @@
+********************************************************
+#include <iostream>
+#include <vector>
+using namespace std;
+
+bool isPrime(int num){
+    bool flag = true;
+    for(int i = 2; i*i <= num; i++){
+        if(num % i == 0){
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
+
+int solution(vector<int> nums){
+    int count = 0 ;
+    int num, size = (int)nums.size();
+    
+    for(int i = 0; i<size; i++){
+        for(int j = i+1; j<size; j++){
+            for(int k = j+1; k<size; k++){
+                num = nums[i] + nums[j] + nums[k];
+                if(isPrime(num)) count ++ ; 
+            }
+        }
+    }
+    return count;
+}
+************************************************************
+
+//소수를 만드는 방법에는 여러가지가 있다. 
+//for문 세개 쓰는건 되게 별론데... 
+//아니다..for문 안이 되게 간단하니까 괜찮으려나..? 
