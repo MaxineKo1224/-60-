@@ -77,4 +77,36 @@ int solution(vector<int> cookie) {
 ******************************************************************************************
 
 //이거 부분합수열 아닌가..?
-    
+
+
+
+//이 코드도 좋아보임
+*****************************************************************************************
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int solution(vector<int> cookie){
+	int answer = 0;
+	int n = cookie.size();
+	for(int i = 0; i<n-1; i++){
+		int lo = i, hi = i;
+		int left = cookie[i], right = 0;
+		while(1){
+			if(left <= right){
+				lo--;
+				if(lo == -1) break;
+				left += cookie[lo];
+			}
+			else{
+				hi++;
+				if(hi == n) break;
+				right += cookie[hi]
+			}
+			if(left == right)
+			    answer = max(answer, left)
+		}
+	}
+	return answer;
+}
+**************************************************************************************
