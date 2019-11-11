@@ -43,22 +43,22 @@ U가 +1 이고 D가 -1일때 둘의 좌표가 같아지도록 (e.g U=((0,0),(0,1
 #위에 코드보다 더 나은거 같은 파이썬 코드 
 def solution(dirs):
     dxs, dys = [-1,0,1,0], [0,-1,0,1]
-	d = {"U":0, "L":1, "D":2, "R":3}
-	visited = set()
-	answer = 0
-	x , y = 0 ,0
-	for dir in dirs:
-	    i = d[dir]
-	    nx = x + dxs[i]
-	    ny = y + dys[i]
-	    if nx < -5 or nx > 5 or ny < -5 or ny > 5:
-                continue
-	    if(x,y,nx,ny) not in visited:
-		 visited.add((x,y,nx,ny))
-		 visited.add(nx,ny,x,y)
-		 answer += 1
-	    x, y = nx, ny 
+    d = {"U":0, "L":1, "D":2, "R":3}
+    visited = set()
+    answer = 0
+    x , y = 0 ,0
+    for dir in dirs:
+        i = d[dir]
+	nx = x + dxs[i]
+	ny = y + dys[i]
+	if nx < -5 or nx > 5 or ny < -5 or ny > 5:
+            continue
+	if(x,y,nx,ny) not in visited:
+	    visited.add((x,y,nx,ny))
+            visited.add(nx,ny,x,y)
+            answer += 1
+	x, y = nx, ny 
 	
-	return answer
+    return answer
 #어떻게 이런걸 생각해내지......흐음.............................................
 
