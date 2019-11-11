@@ -49,15 +49,15 @@ def solution(dirs):
 	x , y = 0 ,0
 	for dir in dirs:
 	    i = d[dir]
-		nx = x + dxs[i]
-		ny = y + dys[i]
-		if nx < -5 or nx > 5 or ny < -5 or ny > 5:
-		    continue
-		if(x,y,nx,ny) not in visited:
-		    visited.add((x,y,nx,ny))
-			visited.add(nx,ny,x,y)
-			answer += 1
-		x, y = nx, ny 
+	    nx = x + dxs[i]
+	    ny = y + dys[i]
+	    if nx < -5 or nx > 5 or ny < -5 or ny > 5:
+                continue
+	    if(x,y,nx,ny) not in visited:
+		 visited.add((x,y,nx,ny))
+		 visited.add(nx,ny,x,y)
+		 answer += 1
+	    x, y = nx, ny 
 	
 	return answer
 #어떻게 이런걸 생각해내지......흐음.............................................
