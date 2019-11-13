@@ -42,31 +42,32 @@ int solution(vector<int> nums){
 #include <iostream>
 using namespace std;
 bool isPrime(int num){
-	int count = 0;
-	bool flag = true;
-	for(int i = 1; i<=num; i++){
-		if(num%i == 0){
-			count++;
-		}
-		if(count>=3){
-			flag = false;
-			break;
-		}
+    int count = 0;
+    bool flag = true;
+    for(int i = 1; i<=num; i++){
+        if(num%i == 0){
+	    count++;
 	}
-	return flag;
+	if(count>=3){
+	    flag = false;
+	    break;
+	}
+    }
+    return flag;
 } 
+
 int solution(vector<int> nums){
-	int answer = 0;
-	int num, size = (int)nums.size();
-	for(int i = 0; i<n; i++){
-		for(int j = i+1; j<n; j++){
-			for(int k = j+1; k<n; k++){
-				num = (nums[i]+nums[j]+nums[k]);
-				isPrime(num) answer++;
-			}
-		}
+    int answer = 0;
+    int num, size = (int)nums.size();
+    for(int i = 0; i<n; i++){
+        for(int j = i+1; j<n; j++){
+	    for(int k = j+1; k<n; k++){
+	        num = (nums[i]+nums[j]+nums[k]);
+		isPrime(num) answer++;
+	    }
 	}
-	return answer;
+    }
+    return answer;
 }
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
