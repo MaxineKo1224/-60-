@@ -97,19 +97,21 @@ int solution(int n, vector<int>stations, int w)
     while(true)
     {
         if(state<=stations.size() && left >= stations[state]-w)
-    {
-        left = station[state] + w + 1;
-        state++;
-    }
+        {
+            left = station[state] + w + 1;
+            state++;
+        }
         else
-    {
-        int newleft = left + w ;
-            if((state <= (int)stations.size()-2) && newleft >= stations[state+1] - w)
-                newleft = stations[state+1] - w - 1;
-        left = newleft + w + 1;
-        count++;
-    }
+        {
+            int newleft = left + w ;
+                if((state <= (int)stations.size()-2) && newleft >= stations[state+1] - w)
+                    newleft = stations[state+1] - w - 1;
+            left = newleft + w + 1;
+            count++;
+        }
         if(left>n) break;
+    
+    }
     return count;
 }
     
